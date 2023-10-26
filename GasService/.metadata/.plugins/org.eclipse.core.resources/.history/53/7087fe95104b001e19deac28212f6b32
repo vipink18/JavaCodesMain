@@ -1,0 +1,54 @@
+package com.capg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capg.entities.Customer;
+import com.capg.exception.IdNotFoundException;
+import com.capg.repository.CustomerRepository;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Override
+	public Customer insterCustomer(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		return null;
+	}
+
+	@Override
+	public Customer deleteCustomer(int customerId) {
+		Optional<Customer> existingCustomer = customerRepository.findById(customerId);
+        if (existingCustomer.isPresent()) {
+            // Delete the customer
+            customerRepository.deleteById(customerId);
+            return existingCustomer.get();
+        } else {
+            throw new IdNotFoundException("Customer not found");
+        }
+		
+	}
+
+	@Override
+	public List<Customer> viewCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Customer viewCustomer(int customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

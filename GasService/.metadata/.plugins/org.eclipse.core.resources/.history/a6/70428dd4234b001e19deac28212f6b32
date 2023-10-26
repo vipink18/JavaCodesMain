@@ -1,0 +1,7 @@
+package com.capg.feignClient;
+
+
+@FeignClient(name = "AMBULANCE-SERVICE", url = "localhost:2024/api/v1/ambulance")
+public interface GasBookingServiceFeign {
+
+}

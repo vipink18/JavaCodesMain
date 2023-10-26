@@ -1,0 +1,13 @@
+package com.capg.service;
+
+import com.capg.entities.GasBooking;
+
+public interface GasBookingService {
+	
+	public GasBooking insertGasBooking(GasBooking gasBooking);
+	public GasBooking updateGasBooking(GasBooking gasBooking);
+	public void deleteGasBooking(int gasBookingId);
+	//no payment module
+	public GasBooking getBill(int gasBookingId);
+
+}

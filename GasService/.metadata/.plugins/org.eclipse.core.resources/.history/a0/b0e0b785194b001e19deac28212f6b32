@@ -1,0 +1,39 @@
+package com.capg.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capg.entities.GasBooking;
+import com.capg.repository.GasBookingRepository;
+
+@Service
+public class GasBookingServiceImpl implements GasBookingService{
+
+	@Autowired
+	private GasBookingRepository gasBookingRepository;
+	
+	
+	@Override
+	public GasBooking insertGasBooking(GasBooking gasBooking) {
+		return gasBookingRepository.save(gasBooking);
+	}
+
+	@Override
+	public GasBooking updateGasBooking(GasBooking gasBooking) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteGasBooking(int gasBookingId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public GasBooking getBill(int gasBookingId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

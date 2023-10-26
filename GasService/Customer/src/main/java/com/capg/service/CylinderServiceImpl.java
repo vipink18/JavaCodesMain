@@ -1,0 +1,57 @@
+package com.capg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capg.entities.Cylinder;
+import com.capg.exception.IdNotFoundException;
+import com.capg.exception.ResourceNotFoundException;
+import com.capg.repository.CylinderRepository;
+
+@Service
+public class CylinderServiceImpl implements CylinderService{
+
+	@Autowired
+	private CylinderRepository cylinderRepository;
+	
+	
+	@Override
+	public Cylinder insterCylinder(Cylinder cylinder) {
+		return cylinderRepository.save(cylinder);
+	}
+
+	@Override
+	public Cylinder updateCylinder(Cylinder cylinder) {
+		Optional<Cylinder> id = cylinderRepository.findById(cylinder.getCylinderId());
+		if(id.isPresent()) {
+			return cylinderRepository.save(cylinder);
+			
+		}else
+			throw new IdNotFoundException("Id not present, id:"+ cylinder.getCylinderId() );
+	}
+
+	@Override
+	public String deleteCylinder(int cylinderId) {
+		Optional<Cylinder> id = cylinderRepository.findById(cylinderId);
+		if(id.isPresent()) {
+			cylinderRepository.deleteById(cylinderId);
+			return "Deleted id: "+cylinderId;
+		}
+		else
+			throw new IdNotFoundException("Invalid Id, id: "+cylinderId);
+	}
+
+	@Override
+	public List<Cylinder> viewCylindersByType(String type) {
+		List<Cylinder> cy = cylinderRepository.findAll();
+		if(cy.isEmpty()) {
+			throw new ResourceNotFoundException("Invalid resource ");
+
+		}
+		return cylinderRepository.findByType(type);
+	}
+
+}

@@ -1,0 +1,62 @@
+package com.capg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capg.entities.Customer;
+import com.capg.exception.IdNotFoundException;
+import com.capg.repository.CustomerRepository;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Override
+	public Customer insterCustomer(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		Optional<Customer> existingCustomer = customerRepository.findById(customer.getCustomerId());
+        if (existingCustomer.isPresent()) {
+            // Update the customer data
+            return customerRepository.save(customer);
+        } else {
+            throw new IdNotFoundException("Customer not found with ID: " + customer.getCustomerId());
+        }
+	}
+
+	@Override
+	public String deleteCustomer(int customerId) {
+		Optional<Customer> id = customerRepository.findById(customerId);
+        if (id.isPresent()) {
+            customerRepository.deleteById(customerId);
+            return "Deleted id:"+ customerId;
+        } else {
+            throw new IdNotFoundException("Id not found id: "+ customerId);
+        }
+		
+	}
+
+	@Override
+	public List<Customer> viewCustomers() {
+		return customerRepository.findAll();
+	}
+
+	@Override
+	public Customer viewCustomer(int customerId) {
+		Optional<Customer> id = customerRepository.findById(customerId);
+        if (id.isPresent()) {
+            return id.get();
+        } else {
+            throw new IdNotFoundException("Id not found id: "+ customerId);
+        }
+	}
+
+}

@@ -1,0 +1,8 @@
+package com.capg.feignClient;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "AMBULANCE-SERVICE", url = "localhost:2024/api/v1/ambulance")
+public interface GasBookingServiceFeign {
+
+}
