@@ -1,0 +1,24 @@
+package DayOne;
+
+class DerivedException extends Exception {
+	void printMsg(){
+		try {
+			System.out.println(1/0);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+}
+
+public class ExceptionExample2 {
+	public static void main(String[] args) {
+		try {
+			System.out.println("try block executed");
+			throw new DerivedException();
+		} catch (DerivedException e) {
+			System.out.println("Caught derived exception: " + e.getMessage());
+		} 
+	}
+}

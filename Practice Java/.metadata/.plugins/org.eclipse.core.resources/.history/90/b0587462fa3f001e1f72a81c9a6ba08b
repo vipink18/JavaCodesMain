@@ -1,0 +1,13 @@
+package DayOne;
+
+class Demo extends Exception{
+
+	
+//	try {
+//		
+//	}
+//	catch() {
+//		
+//	}
+	
+}

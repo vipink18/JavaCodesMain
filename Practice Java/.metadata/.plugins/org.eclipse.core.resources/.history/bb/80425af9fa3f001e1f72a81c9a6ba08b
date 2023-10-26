@@ -1,0 +1,26 @@
+package DayOne;
+
+class BaseException extends Exception {
+	public BaseException() {
+		super("Base exception");
+	}
+}
+
+class DerivedException extends BaseException {
+	public DerivedException() {
+		super();
+	}
+}
+
+public class ExceptionExample2 {
+	public static void main(String[] args) {
+		try {
+			// code that might throw exceptions
+			throw new DerivedException();
+		} catch (DerivedException e) {
+			System.out.println("Caught derived exception: " + e.getMessage());
+		} catch (BaseException e) {
+			System.out.println("Caught base exception: " + e.getMessage());
+		}
+	}
+}
